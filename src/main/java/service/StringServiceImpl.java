@@ -19,11 +19,16 @@ public class StringServiceImpl implements StringService {
         if (!validation(list)) return "";
 
         String output = input;
+
+        System.out.println(output);
+
         for (Integer i = 0; i <= output.length(); i++) {
             output = processWithTag(Util.StringToList(output), tag);
+            System.out.println(output);
         }
         return output;
     }
+
 
 
     private String processWithTag(List<String> list, Integer tag) {
@@ -31,44 +36,44 @@ public class StringServiceImpl implements StringService {
         String repeatLetter = "";
         Integer repeatCnt = 0;
         Integer len = list.size();
-        Integer currLocation = 0;
+        Integer currentLocation = 0;
 
         if (len < 3) {
             return String.join("", list);
         }
 
-        for (String curr : list) {
-            currLocation++;
+        for (String current : list) {
+            currentLocation++;
 
             //Repeating, not at the end
-            if (repeatLetter.equals(curr) && currLocation < len) {
-                body = body + curr;
+            if (repeatLetter.equals(current) && currentLocation <= len) {
+                body = body + current;
                 repeatCnt++;
             }
 
             //Repeating, at the end
-            if (repeatLetter.equals(curr) && currLocation == len) {
+            if (repeatLetter.equals(current) && repeatCnt >= 2 && currentLocation == len) {
                 body = processRepeat(body, repeatCnt, repeatLetter, tag);
             }
 
             //Repeating stopped, repeat cnt is larger than 2, not at the end
-            if (!repeatLetter.equals(curr) && repeatCnt >= 2 && currLocation < len) {
-                body = processRepeat(body, repeatCnt, repeatLetter, tag) + curr;
-                repeatLetter = curr;
+            if (!repeatLetter.equals(current) && repeatCnt >= 2 && currentLocation < len) {
+                body = processRepeat(body, repeatCnt, repeatLetter, tag) + current;
+                repeatLetter = current;
                 repeatCnt = 0;
             }
 
             //Repeating stopped, repeat cnt is larger than 2, at the end
-            if (!repeatLetter.equals(curr) && repeatCnt >= 2 && currLocation == len) {
-                body = processRepeat(body, repeatCnt, repeatLetter, tag) + curr;
-                repeatLetter = curr;
+            if (!repeatLetter.equals(current) && repeatCnt >= 2 && currentLocation == len) {
+                body = processRepeat(body, repeatCnt, repeatLetter, tag) + current;
+                repeatLetter = current;
                 repeatCnt = 0;
             }
 
             //Repeating stopped, repeat cnt is smaller than 2
-            if (!repeatLetter.equals(curr) && repeatCnt < 2) {
-                body += curr;
-                repeatLetter = curr;
+            if (!repeatLetter.equals(current) && repeatCnt < 2) {
+                body += current;
+                repeatLetter = current;
                 repeatCnt = 0;
             }
 
@@ -85,8 +90,9 @@ public class StringServiceImpl implements StringService {
         }
 
         if (tag == tagReplace) {
-            conv = body.substring(0, body.length() - repeatCount - 1) + Util.GetFrontLetter(repeatLetter);  //get the letter before current in alphabet
+            conv = body.substring(0, body.length() - repeatCount - 1) + Util.GetFrontLetter(repeatLetter);  //get the letter before currentent in alphabet
         }
+
 
         return conv;
     }

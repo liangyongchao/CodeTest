@@ -32,6 +32,7 @@ public class StringOperation {
             System.out.println(result);
         }
 
+        sc.close();
     }
 
     private static boolean TagValidation(String stage) {

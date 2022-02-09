@@ -1,15 +1,14 @@
 import org.junit.Assert;
 import org.junit.Test;
-import service.StringService;
 import service.StringServiceImpl;
 
 public class RemoveConsecutiveCharTest {
-    StringService service = new StringServiceImpl();
+    StringServiceImpl service = new StringServiceImpl();
 
     Integer tag = 1;
 
     @Test
-    public void removeConsecutiveCharTest1() {
+    public void removeConsecutiveCharTest1(){
 
         String i = this.service.process("aacccad", tag);
         String j = "d";
@@ -18,7 +17,7 @@ public class RemoveConsecutiveCharTest {
     }
 
     @Test
-    public void removeConsecutiveCharTest2() {
+    public void removeConsecutiveCharTest2(){
 
         String i = this.service.process("aacccadddd", tag);
         String j = "";
@@ -27,7 +26,7 @@ public class RemoveConsecutiveCharTest {
     }
 
     @Test
-    public void removeConsecutiveCharTest3() {
+    public void removeConsecutiveCharTest3(){
 
         String i = this.service.process("aaacccadddd", tag);
         String j = "a";
@@ -35,8 +34,9 @@ public class RemoveConsecutiveCharTest {
         Assert.assertEquals(i, j);
     }
 
+
     @Test
-    public void removeConsecutiveCharTest4() {
+    public void removeConsecutiveCharTest4(){
 
         String i = this.service.process("aa", tag);
         String j = "aa";
@@ -45,16 +45,16 @@ public class RemoveConsecutiveCharTest {
     }
 
     @Test
-    public void removeConsecutiveCharTest5() {
+    public void removeConsecutiveCharTest5(){
 
-        String i = this.service.process("aabcccbbdddbddddbddd", tag);
+        String i = this.service.process("aabcccbbdddbddddbdddddddd", tag);
         String j = "aa";
 
         Assert.assertEquals(i, j);
     }
 
     @Test
-    public void removeConsecutiveCharTest7() {
+    public void removeConsecutiveCharTest6(){
 
         String i = this.service.process("a3", tag);
         String j = "";
@@ -73,6 +73,33 @@ public class RemoveConsecutiveCharTest {
 
         i = this.service.process("a$", tag);
         j = "";
+
+        Assert.assertEquals(i, j);
+    }
+
+    @Test
+    public void removeConsecutiveCharTest7(){
+
+        String i = this.service.process("abbdcccddba", tag);
+        String j = "aa";
+
+        Assert.assertEquals(i, j);
+    }
+
+    @Test
+    public void removeConsecutiveCharTest8(){
+
+        String i = this.service.process("abbdcccddbaa", tag);
+        String j = "";
+
+        Assert.assertEquals(i, j);
+    }
+
+    @Test
+    public void removeConsecutiveCharTest9(){
+
+        String i = this.service.process("aaa", tag);
+        String j = "";
 
         Assert.assertEquals(i, j);
     }
