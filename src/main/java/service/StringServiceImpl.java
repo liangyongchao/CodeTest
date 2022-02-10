@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 
-public class StringServiceImpl implements StringService {
+public abstract class StringServiceImpl implements StringService {
 
     private char chars[];
     private List<String> list;
@@ -56,15 +56,8 @@ public class StringServiceImpl implements StringService {
                 body = processRepeat(body, repeatCnt, repeatLetter, tag);
             }
 
-            //Repeating stopped, repeat cnt is larger than 2, not at the end
-            if (!repeatLetter.equals(current) && repeatCnt >= 2 && currentLocation < len) {
-                body = processRepeat(body, repeatCnt, repeatLetter, tag) + current;
-                repeatLetter = current;
-                repeatCnt = 0;
-            }
-
-            //Repeating stopped, repeat cnt is larger than 2, at the end
-            if (!repeatLetter.equals(current) && repeatCnt >= 2 && currentLocation == len) {
+            //Repeating stopped, repeat cnt is larger than 2
+            if (!repeatLetter.equals(current) && repeatCnt >= 2) {
                 body = processRepeat(body, repeatCnt, repeatLetter, tag) + current;
                 repeatLetter = current;
                 repeatCnt = 0;
@@ -81,22 +74,7 @@ public class StringServiceImpl implements StringService {
         return body;
     }
 
-    private String processRepeat(String body, Integer repeatCount, String repeatLetter, Integer tag) {
-
-        String conv = "";
-
-        if (tag == tagRemove) {
-            conv = body.substring(0, body.length() - repeatCount - 1);
-        }
-
-        if (tag == tagReplace) {
-            conv = body.substring(0, body.length() - repeatCount - 1) + Util.GetFrontLetter(repeatLetter);  //get the letter before currentent in alphabet
-        }
-
-
-        return conv;
-    }
-
+    public abstract String processRepeat(String body, Integer repeatCount, String repeatLetter, Integer tag);
 
     public boolean validation(List<String> li) {
 

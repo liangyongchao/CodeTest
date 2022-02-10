@@ -1,9 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
+import service.RepeatStringRemoval;
 import service.StringServiceImpl;
 
 public class RemoveConsecutiveCharTest {
-    StringServiceImpl service = new StringServiceImpl();
+    StringServiceImpl service = new RepeatStringRemoval();
 
     Integer tag = 1;
 

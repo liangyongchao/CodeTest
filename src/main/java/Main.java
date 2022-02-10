@@ -1,15 +1,17 @@
+import service.RepeatStringRemoval;
+import service.RepeatStringReplacement;
 import service.StringService;
 import service.StringServiceImpl;
 
 import java.util.Scanner;
 
-public class StringOperation {
+public class Main {
 
     public static void main(String[] args) throws Exception {
 
         Scanner sc = new Scanner(System.in);
 
-        StringService service = new StringServiceImpl();
+        StringService service;
 
         String result = "";
 
@@ -26,6 +28,8 @@ public class StringOperation {
             String testString = sc.nextLine();
 
             System.out.println(testString);
+
+            service = tag.equals(1) ? new RepeatStringRemoval() : new RepeatStringReplacement();
 
             result = service.process(testString, tag);
 

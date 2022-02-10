@@ -1,10 +1,11 @@
 import org.junit.Assert;
 import org.junit.Test;
+import service.RepeatStringReplacement;
 import service.StringServiceImpl;
 
 public class ReplaceConsecutiveCharTest {
 
-    StringServiceImpl service = new StringServiceImpl();
+    StringServiceImpl service = new RepeatStringReplacement();
 
     Integer tag = 2;
 
