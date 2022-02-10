@@ -23,7 +23,7 @@ public abstract class StringServiceImpl implements StringService {
         System.out.println(output);
 
         for (Integer i = 0; i <= output.length(); i++) {
-            output = processWithTag(Util.StringToList(output), tag);
+            output = traverse(Util.StringToList(output));
             System.out.println(output);
         }
         return output;
@@ -31,7 +31,7 @@ public abstract class StringServiceImpl implements StringService {
 
 
 
-    private String processWithTag(List<String> list, Integer tag) {
+    private String traverse(List<String> list) {
         String body = "";
         String repeatLetter = "";
         Integer repeatCnt = 0;
@@ -53,12 +53,12 @@ public abstract class StringServiceImpl implements StringService {
 
             //Repeating, at the end
             if (repeatLetter.equals(current) && repeatCnt >= 2 && currentLocation == len) {
-                body = processRepeat(body, repeatCnt, repeatLetter, tag);
+                body = processRepeat(body, repeatCnt, repeatLetter);
             }
 
             //Repeating stopped, repeat cnt is larger than 2
             if (!repeatLetter.equals(current) && repeatCnt >= 2) {
-                body = processRepeat(body, repeatCnt, repeatLetter, tag) + current;
+                body = processRepeat(body, repeatCnt, repeatLetter) + current;
                 repeatLetter = current;
                 repeatCnt = 0;
             }
@@ -74,7 +74,7 @@ public abstract class StringServiceImpl implements StringService {
         return body;
     }
 
-    public abstract String processRepeat(String body, Integer repeatCount, String repeatLetter, Integer tag);
+    public abstract String processRepeat(String body, Integer repeatCount, String repeatLetter);
 
     public boolean validation(List<String> li) {
 
