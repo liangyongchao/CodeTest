@@ -31,7 +31,7 @@ public class Main {
 
             service = tag.equals(1) ? new RepeatStringRemoval() : new RepeatStringReplacement();
 
-            result = service.process(testString, tag);
+            result = service.process(testString);
 
             System.out.println(result);
         }

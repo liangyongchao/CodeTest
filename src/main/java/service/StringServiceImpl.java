@@ -4,28 +4,24 @@ import java.util.List;
 
 public abstract class StringServiceImpl implements StringService {
 
-    private char chars[];
-    private List<String> list;
-
-    private Integer tagRemove = 1;
-    private Integer tagReplace = 2;
-
-
     @Override
-    public String process(String input, Integer tag) {
+    public String process(String input) {
 
-        this.list = Util.StringToList(input);
+        if (!validation(Util.StringToList(input))) return "";
 
-        if (!validation(list)) return "";
+        System.out.println(input);
 
         String output = input;
 
-        System.out.println(output);
-
         for (Integer i = 0; i <= output.length(); i++) {
+
             output = traverse(Util.StringToList(output));
             System.out.println(output);
+
         }
+
+        System.out.println("=============");
+
         return output;
     }
 
@@ -82,7 +78,7 @@ public abstract class StringServiceImpl implements StringService {
 
         badChar = (String) li.stream().filter(ch -> !Character.isLowerCase(ch.charAt(0)))
                 .findAny().map(r -> {
-                    System.out.println("Sorry, the input is invalid.");
+                    System.out.println("Input Invalid");
                     return r;
                 })
                 .orElse("");
