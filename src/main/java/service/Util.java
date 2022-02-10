@@ -26,4 +26,18 @@ public class Util {
         return front;
 
     }
+
+    public static boolean inputListValidation(List<String> li) {
+
+        String badChar = "";
+
+        badChar = (String) li.stream().filter(ch -> !Character.isLowerCase(ch.charAt(0)))
+                .findAny().map(r -> {
+                    System.out.println("Input Invalid");
+                    return r;
+                })
+                .orElse("");
+
+        return (badChar == "") ? true : false;
+    }
 }

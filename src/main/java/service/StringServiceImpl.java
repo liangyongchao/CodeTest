@@ -7,20 +7,15 @@ public abstract class StringServiceImpl implements StringService {
     @Override
     public String process(String input) {
 
-        if (!validation(Util.StringToList(input))) return "";
-
-        System.out.println(input);
+        if (!Util.inputListValidation(Util.StringToList(input))) return "";
 
         String output = input;
 
         for (Integer i = 0; i <= output.length(); i++) {
 
             output = traverse(Util.StringToList(output));
-            System.out.println(output);
 
         }
-
-        System.out.println("=============");
 
         return output;
     }
@@ -43,7 +38,7 @@ public abstract class StringServiceImpl implements StringService {
 
             //Repeating, not at the end
             if (repeatLetter.equals(current) && currentLocation <= len) {
-                body = body + current;
+                body += current;
                 repeatCnt++;
             }
 
@@ -72,17 +67,5 @@ public abstract class StringServiceImpl implements StringService {
 
     public abstract String processRepeat(String body, Integer repeatCount, String repeatLetter);
 
-    public boolean validation(List<String> li) {
 
-        String badChar = "";
-
-        badChar = (String) li.stream().filter(ch -> !Character.isLowerCase(ch.charAt(0)))
-                .findAny().map(r -> {
-                    System.out.println("Input Invalid");
-                    return r;
-                })
-                .orElse("");
-
-        return (badChar == "") ? true : false;
-    }
 }
